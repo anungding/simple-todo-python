@@ -1,23 +1,45 @@
-
 students = []
 
+# Fungsi untuk menambahkan mahasiswa
 def add_student():
-    name = input("NAMA MAHASISWA:")
-    major = input("JURUSAN:")
+    name = input("NAMA MAHASISWA: ")
+    major = input("JURUSAN: ")
     students.append({"name": name, "major": major})
+    print("Data berhasil ditambahkan!\n")
 
+# Fungsi untuk menampilkan data mahasiswa
 def show_students():
     if len(students) > 0:
-        print(students)
+        print("\n--- DAFTAR MAHASISWA ---")
+        for i, student in enumerate(students):
+            print(f"[{i}] Nama: {student['name']}, Jurusan: {student['major']}")
+        print("------------------------\n")
     else:
-        print("Data tidak ada!")
-       
+        print("\nData tidak ada!\n")
 
+# Fungsi untuk mengedit data mahasiswa
+def edit_student():
+    show_students()
+    if len(students) > 0:
+        try:
+            index = int(input("Masukkan indeks mahasiswa yang ingin diedit: "))
+            if 0 <= index < len(students):
+                name = input("Nama baru: ")
+                major = input("Jurusan baru: ")
+                students[index] = {"name": name, "major": major}
+                print("Data berhasil diperbarui!\n")
+            else:
+                print("Indeks tidak valid!\n")
+        except ValueError:
+            print("Masukkan angka yang valid!\n")
 
+# Fungsi untuk menampilkan menu
 def show_menu():
     print("----------- MENU ----------")
     print("[1] Show Data")
     print("[2] Add Data")
+    print("[3] Edit Data")
+    print("[4] Exit")
     
     menu = input("PILIH MENU> ")
     if menu == "1":
@@ -25,11 +47,14 @@ def show_menu():
     elif menu == "2":
         add_student()
     elif menu == "3":
+        edit_student()
+    elif menu == "4":
+        print("Keluar dari program. Sampai jumpa!")
         exit()
     else:
-        print("Salah pilih!")
+        print("Menu tidak valid!\n")
 
+# Main program
 if __name__ == "__main__":
-
-    while(True):
+    while True:
         show_menu()
